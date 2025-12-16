@@ -2,6 +2,10 @@ import random
 import pandas as pd
 import numpy as np
 
+def weighted_choice(choices, weights):
+    return random.choices(choices, weights=weights, k=1)[0]
+
+
 NUM_ROWS = 5000
 data = []
 
@@ -48,17 +52,73 @@ def assign_risk(patterns, row):
 
 
 for _ in range(NUM_ROWS):
+    # --------------------
+    # Basic info
+    # --------------------
     age = random.randint(18, 85)
     gender = random.choice(["Male", "Female"])
-    heart_rate = random.randint(40, 160)
-    systolic_bp = random.randint(90, 200)
-    diastolic_bp = random.randint(60, 120)
-    spo2 = random.randint(75, 100)
-    respiration_rate = random.randint(8, 40)
-    body_temp = round(random.uniform(34.0, 41.0), 1)
-    blood_sugar = random.randint(40, 350)
 
-    # ✅ FIRST: create row
+    # --------------------
+    # Cardiovascular (mostly normal)
+    # --------------------
+    heart_rate = weighted_choice(
+        [random.randint(60, 100), random.randint(40, 160)],
+        weights=[0.75, 0.25]
+    )
+
+    systolic_bp = weighted_choice(
+        [random.randint(110, 140), random.randint(90, 200)],
+        weights=[0.7, 0.3]
+    )
+
+    diastolic_bp = weighted_choice(
+        [random.randint(70, 90), random.randint(60, 120)],
+        weights=[0.7, 0.3]
+    )
+
+    # --------------------
+    # Respiratory
+    # --------------------
+    spo2 = weighted_choice(
+        [random.randint(95, 100), random.randint(85, 94), random.randint(75, 84)],
+        weights=[0.65, 0.25, 0.10]
+    )
+
+    respiration_rate = weighted_choice(
+        [random.randint(12, 20), random.randint(21, 30), random.randint(31, 40)],
+        weights=[0.65, 0.25, 0.10]
+    )
+
+    # --------------------
+    # Temperature
+    # --------------------
+    body_temp = weighted_choice(
+        [
+            round(random.uniform(36.2, 37.5), 1),
+            round(random.uniform(37.6, 39.0), 1),
+            round(random.uniform(34.0, 35.9), 1),
+            round(random.uniform(39.1, 41.0), 1)
+        ],
+        weights=[0.70, 0.15, 0.07, 0.08]
+    )
+
+    # --------------------
+    # Blood Sugar
+    # --------------------
+    blood_sugar = weighted_choice(
+        [
+            random.randint(80, 140),
+            random.randint(60, 79),
+            random.randint(141, 250),
+            random.randint(40, 59),
+            random.randint(251, 350)
+        ],
+        weights=[0.60, 0.10, 0.15, 0.08, 0.07]
+    )
+
+    # --------------------
+    # Create row
+    # --------------------
     row = {
         "age": age,
         "gender": gender,
@@ -71,7 +131,9 @@ for _ in range(NUM_ROWS):
         "blood_sugar": blood_sugar
     }
 
-    # ✅ THEN: AI thinks on row
+    # --------------------
+    # Inference
+    # --------------------
     patterns = detect_patterns(row)
     risk_level = assign_risk(patterns, row)
 
@@ -80,6 +142,9 @@ for _ in range(NUM_ROWS):
 
     data.append(row)
 
+
+
+    
 print(data[0])
 
 df = pd.DataFrame(data)
