@@ -5,18 +5,18 @@ import pandas as pd
 
 from ai_decision_engine import get_emergency_guidance
 
-
+# -----------------------
 # App init
-
+# -----------------------
 app = FastAPI(title="AI Critical Minutes API")
 
 # Load model
 model = joblib.load("models/emergency_risk_model.joblib")
 
 
-
+# -----------------------
 # Input schema
-
+# -----------------------
 class VitalsInput(BaseModel):
     age: int
     heart_rate: int
@@ -28,9 +28,9 @@ class VitalsInput(BaseModel):
     blood_sugar: int
 
 
-
+# -----------------------
 # Prediction endpoint
-
+# -----------------------
 @app.post("/predict")
 def predict_emergency(vitals: VitalsInput):
     # Convert input to DataFrame
