@@ -62,3 +62,12 @@ def get_emergency_guidance(risk_level):
             "donts": [],
             "alert": "UNKNOWN"
         }
+    
+if __name__ == "__main__":
+    for risk in [0, 1, 2]:
+        print("\n--- RISK LEVEL:", risk, "---")
+        guidance = get_emergency_guidance(risk)
+        for key, value in guidance.items():
+            print(f"{key}: {value}")
+
+
