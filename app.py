@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 import joblib
 import pandas as pd
+import os
 
 from ai_decision_engine import get_emergency_guidance
 
@@ -11,7 +12,9 @@ from ai_decision_engine import get_emergency_guidance
 app = FastAPI(title="AI Critical Minutes API")
 
 # Load model
-model = joblib.load("models/emergency_risk_model.joblib")
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+MODEL_PATH = os.path.join(BASE_DIR, "models", "emergency_risk_model.joblib")
+model = joblib.load(MODEL_PATH)
 
 
 
@@ -27,6 +30,9 @@ class VitalsInput(BaseModel):
     body_temp: float
     blood_sugar: int
 
+@app.get("/")
+def home():
+    return {"message": "AI Critical Minutes API is running"}
 
 
 # Prediction endpoint
