@@ -1,4 +1,5 @@
 import pandas as pd
+import matplotlib.pyplot as plt
 
 
 df = pd.read_csv("data/golden_ai_emergency_dataset.csv")
@@ -26,3 +27,13 @@ print(df.head())
 
 print("\n====== QUICK STATS ======")
 print(df.describe())
+
+
+# VISUAL EDA
+
+df["emergency_risk_level"].value_counts().sort_index().plot(kind="bar")
+plt.xlabel("Risk Level (0 = Normal, 1 = Warning, 2 = High)")
+plt.ylabel("Count")
+plt.title("Emergency Risk Level Distribution")
+plt.tight_layout()
+plt.show()
