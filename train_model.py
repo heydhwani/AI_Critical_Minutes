@@ -41,3 +41,10 @@ model = RandomForestClassifier(
 
 model.fit(X_train, y_train)
 y_pred = model.predict(X_test)
+
+# Evaluation
+print("\nCONFUSION MATRIX:")
+print(confusion_matrix(y_test, y_pred))
+
+print("\nCLASSIFICATION REPORT:")
+print(classification_report(y_test, y_pred))
