@@ -81,3 +81,13 @@ for _ in range(NUM_ROWS):
     data.append(row)
 
 print(data[0])
+
+df = pd.DataFrame(data)
+
+df.to_csv(
+    "data/golden_ai_emergency_dataset.csv",
+    index=False
+)
+
+print("Dataset saved successfully!")
+
