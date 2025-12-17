@@ -67,7 +67,7 @@ AI_Critical_Minutes/
 
 ```
 ---
-## 🧠 Model Overview
+##  Model Overview
 
 - **Problem Type**: Supervised Multi-Class Classification
 - **Algorithm**: Random Forest Classifier
