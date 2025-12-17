@@ -89,8 +89,10 @@ if st.button("🔍 Check Emergency Risk"):
             
             if guidance["alert"] == "HIGH":
                 st.error("🚨 HIGH EMERGENCY")
+                speak_alert("Critical condition detected. Call emergency services immediately.")
             elif guidance["alert"] == "LOW":
                 st.warning("⚠️ WARNING")
+                speak_alert("Warning. Please sit down safely and monitor your condition.")
             else:
                 st.success("✅ NORMAL")
 
