@@ -54,7 +54,7 @@ AI_Critical_Minutes/
 ├── pycache/                                     # Python cache files
 │
 ├── ai_decision_engine.py                        # Converts risk level into Do / Don’t guidance
-├── app.py # FastAPI backend (prediction API)
+├── app.py                                       # FastAPI backend (prediction API)
 ├── eda_check.py                                 # EDA, correlation & data validation
 ├── generate_dataset.py                          # Synthetic dataset generation logic
 ├── inference_pipeline.py                        # End-to-end inference pipeline
