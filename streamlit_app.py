@@ -1,4 +1,6 @@
 import streamlit as st
+import streamlit.components.v1 as components
+
 import requests
 
 
@@ -45,6 +47,19 @@ st.divider()
 
 API_URL = "https://ai-critical-minutes-2.onrender.com/predict"
 
+
+
+def speak_alert(message):
+    html_code = f"""
+    <script>
+    var msg = new SpeechSynthesisUtterance("{message}");
+    msg.volume = 1.0;
+    msg.rate = 1.0;
+    msg.pitch = 1.0;
+    window.speechSynthesis.speak(msg);
+    </script>
+    """
+    components.html(html_code)
 
 # Button
 
