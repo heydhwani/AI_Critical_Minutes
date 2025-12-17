@@ -60,7 +60,7 @@ def speak_list(title, items):
     window.speechSynthesis.speak(msg);
     </script>
     """
-    components.html(html_code)
+    components.html(html_code,height=0)
 
 
 # Button
