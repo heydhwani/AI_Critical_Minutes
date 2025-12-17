@@ -49,17 +49,19 @@ API_URL = "https://ai-critical-minutes-2.onrender.com/predict"
 
 
 
-def speak_alert(message):
+def speak_list(title, items):
+    text = title + ". " + ". ".join(items)
     html_code = f"""
     <script>
-    var msg = new SpeechSynthesisUtterance("{message}");
+    var msg = new SpeechSynthesisUtterance("{text}");
     msg.volume = 1.0;
-    msg.rate = 1.0;
+    msg.rate = 0.95;
     msg.pitch = 1.0;
     window.speechSynthesis.speak(msg);
     </script>
     """
     components.html(html_code)
+
 
 # Button
 
@@ -89,12 +91,16 @@ if st.button("🔍 Check Emergency Risk"):
             
             if guidance["alert"] == "HIGH":
                 st.error("🚨 HIGH EMERGENCY")
-                speak_alert("Critical condition detected. Call emergency services immediately.")
-            elif guidance["alert"] == "LOW":
-                st.warning("⚠️ WARNING")
-                speak_alert("Warning. Please sit down safely and monitor your condition.")
-            else:
-                st.success("✅ NORMAL")
+
+                speak_list(
+                    "Critical condition detected. Follow these steps",
+                     guidance["dos"][:3]   # sirf top 3 DOs
+                )
+
+                speak_list(
+                    "Do not do the following",
+                     guidance["donts"][:2] # sirf top 2 DON’Ts
+                )
 
             st.write(f"**{guidance['message']}**")
 
