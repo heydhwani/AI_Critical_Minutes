@@ -78,3 +78,12 @@ EDA insights were used to support both model training and decision logic.
 
 ## 🏗️ System Architecture
 
+User / Sensor Inputs
+↓
+Machine Learning Model
+↓
+Emergency Risk Level (0 / 1 / 2)
+↓
+AI Decision Engine
+↓
+Do / Don’t Guidance + Voice Alerts
