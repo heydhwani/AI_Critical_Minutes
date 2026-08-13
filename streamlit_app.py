@@ -83,7 +83,7 @@ if st.button("🔍 Check Emergency Risk"):
     }
 
     try:
-        response = requests.post(API_URL, json=payload, timeout=10)
+        response = requests.post(API_URL, json=payload, timeout=60)
 
         if response.status_code == 200:
             result = response.json()
